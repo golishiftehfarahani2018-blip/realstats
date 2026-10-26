@@ -1,0 +1,1 @@
+PASS: verified TLS/hostname with explicit local trust, production DEBUG=0, secure HttpOnly session, secure CSRF cookie, HSTS, login, rejected missing CSRF, logout invalidation. Local test certificate only; no public certificate or hosting claimed.

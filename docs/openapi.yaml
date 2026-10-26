@@ -1,0 +1,3613 @@
+openapi: 3.0.3
+info:
+  title: Office Management API
+  version: 1.1.0
+paths:
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/advisors:
+    get:
+      operationId: v1_advisors_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_advisors_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvisorInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdvisorInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdvisorInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/advisors/{id}:
+    patch:
+      operationId: v1_advisors_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedActiveInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedActiveInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedActiveInput'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/audit:
+    get:
+      operationId: v1_audit_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/auth/csrf:
+    get:
+      operationId: v1_auth_csrf_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/auth/login:
+    post:
+      operationId: v1_auth_login_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/auth/logout:
+    post:
+      operationId: v1_auth_logout_create
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/cooperations:
+    get:
+      operationId: cooperations_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CooperationPage'
+          description: ''
+    post:
+      operationId: v1_cooperations_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CooperationInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CooperationInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CooperationInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CooperationOutput'
+          description: ''
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CooperationOutput'
+          description: ''
+  /api/v1/cooperations/{id}:
+    get:
+      operationId: v1_cooperations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CooperationOutput'
+          description: ''
+    patch:
+      operationId: v1_cooperations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCooperationDecision'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCooperationDecision'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCooperationDecision'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CooperationOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/cooperations/{id}/history:
+    get:
+      operationId: v1_cooperations_history_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/customer-inbox:
+    get:
+      operationId: v1_customer_inbox_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/customer-inbox/{id}:
+    patch:
+      operationId: v1_customer_inbox_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRequestChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRequestChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRequestChange'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/customer/auth/{action}:
+    post:
+      operationId: v1_customer_auth_create
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAuth'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomerAuth'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomerAuth'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/customer/favorites:
+    get:
+      operationId: v1_customer_favorites_retrieve
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/customer/favorites/{id}:
+    post:
+      operationId: v1_customer_favorites_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    delete:
+      operationId: v1_customer_favorites_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/customer/me:
+    get:
+      operationId: v1_customer_me_retrieve
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/customer/requests:
+    get:
+      operationId: v1_customer_requests_retrieve
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_customer_requests_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RequestInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RequestInput'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/demands:
+    get:
+      operationId: demands_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandPage'
+          description: ''
+    post:
+      operationId: v1_demands_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DemandInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DemandInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/demands/{id}:
+    get:
+      operationId: v1_demands_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandOutput'
+          description: ''
+    patch:
+      operationId: v1_demands_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDemandEditInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDemandEditInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDemandEditInput'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/demands/{id}/assign:
+    post:
+      operationId: v1_demands_assign_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AssignInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AssignInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/demands/{id}/assignments:
+    get:
+      operationId: v1_demands_assignments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/demands/{id}/matches:
+    get:
+      operationId: v1_demands_matches_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchPage'
+          description: ''
+  /api/v1/demands/{id}/private:
+    get:
+      operationId: v1_demands_private_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactOutput'
+          description: ''
+  /api/v1/finance/deals:
+    get:
+      operationId: v1_finance_deals_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_finance_deals_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateDeal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateDeal'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/finance/deals/{id}/{action}:
+    post:
+      operationId: business_deal_action
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/finance/members:
+    get:
+      operationId: v1_finance_members_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/followups:
+    get:
+      operationId: followups_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpPage'
+          description: ''
+    post:
+      operationId: v1_followups_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FollowUpInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FollowUpInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FollowUpInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpOutput'
+          description: ''
+  /api/v1/followups/{id}:
+    get:
+      operationId: v1_followups_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpOutput'
+          description: ''
+    patch:
+      operationId: v1_followups_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVersionInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVersionInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVersionInput'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/followups/{id}/private:
+    get:
+      operationId: v1_followups_private_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteOutput'
+          description: ''
+  /api/v1/invitations:
+    get:
+      operationId: v1_invitations_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_invitations_create
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/invitations/{id}:
+    delete:
+      operationId: v1_invitations_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/me:
+    get:
+      operationId: v1_me_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/notifications:
+    get:
+      operationId: notifications_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationPage'
+          description: ''
+  /api/v1/notifications/{id}:
+    patch:
+      operationId: v1_notifications_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationOutput'
+          description: ''
+  /api/v1/offerings:
+    get:
+      operationId: offerings_list
+      parameters:
+      - in: query
+        name: area_max
+        schema:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+      - in: query
+        name: area_min
+        schema:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+      - in: query
+        name: deposit_max
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: deposit_min
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: kind
+        schema:
+          enum:
+          - apartment
+          - villa
+          - land
+          - commercial
+          - office
+          - other
+          type: string
+          minLength: 1
+        description: |-
+          * `apartment` - apartment
+          * `villa` - villa
+          * `land` - land
+          * `commercial` - commercial
+          * `office` - office
+          * `other` - other
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 30
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - in: query
+        name: paginated
+        schema:
+          enum:
+          - '1'
+          type: string
+          minLength: 1
+        description: '* `1` - 1'
+      - in: query
+        name: price_max
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: price_min
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: q
+        schema:
+          type: string
+          maxLength: 100
+      - in: query
+        name: rent_max
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: rent_min
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: status
+        schema:
+          enum:
+          - draft
+          - submitted
+          - revision
+          - approved
+          type: string
+          minLength: 1
+        description: |-
+          * `draft` - draft
+          * `submitted` - submitted
+          * `revision` - revision
+          * `approved` - approved
+      - in: query
+        name: transaction
+        schema:
+          enum:
+          - sale
+          - rent
+          type: string
+          minLength: 1
+        description: |-
+          * `sale` - sale
+          * `rent` - rent
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingPage'
+          description: ''
+    post:
+      operationId: v1_offerings_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferingInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OfferingInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OfferingInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingOutput'
+          description: ''
+  /api/v1/offerings/{id}:
+    get:
+      operationId: v1_offerings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingOutput'
+          description: ''
+    patch:
+      operationId: v1_offerings_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEditInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEditInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEditInput'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/assign:
+    post:
+      operationId: v1_offerings_assign_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AssignInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AssignInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/assignments:
+    get:
+      operationId: v1_offerings_assignments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/documents:
+    get:
+      operationId: private_documents_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_offerings_documents_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DocumentInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/documents/{doc_id}:
+    get:
+      operationId: v1_offerings_documents_retrieve
+      parameters:
+      - in: path
+        name: doc_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+          description: ''
+  /api/v1/offerings/{id}/private:
+    get:
+      operationId: v1_offerings_private_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivateOutput'
+          description: ''
+  /api/v1/offerings/{id}/public-images:
+    post:
+      operationId: v1_offerings_public_images_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicImageInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublicImageInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublicImageInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/publication:
+    get:
+      operationId: v1_offerings_publication_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_offerings_publication_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/review:
+    post:
+      operationId: v1_offerings_review_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/revisions:
+    get:
+      operationId: v1_offerings_revisions_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    post:
+      operationId: v1_offerings_revisions_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevisionInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RevisionInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RevisionInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/offerings/{id}/submit:
+    post:
+      operationId: v1_offerings_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VersionInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VersionInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferingOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/people:
+    get:
+      operationId: people_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonPage'
+          description: ''
+    post:
+      operationId: v1_people_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/people/{id}/private:
+    get:
+      operationId: v1_people_private_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactOutput'
+          description: ''
+  /api/v1/public/accept-invitation:
+    post:
+      operationId: v1_public_accept_invitation_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteAccept'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InviteAccept'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InviteAccept'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/public/images/{id}:
+    get:
+      operationId: v1_public_images_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+          description: ''
+  /api/v1/public/listings:
+    get:
+      operationId: v1_public_listings_retrieve
+      parameters:
+      - in: query
+        name: area_max
+        schema:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+      - in: query
+        name: area_min
+        schema:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+      - in: query
+        name: deposit_max
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: deposit_min
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: kind
+        schema:
+          enum:
+          - apartment
+          - villa
+          - land
+          - commercial
+          - office
+          - other
+          type: string
+          minLength: 1
+        description: |-
+          * `apartment` - apartment
+          * `villa` - villa
+          * `land` - land
+          * `commercial` - commercial
+          * `office` - office
+          * `other` - other
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 30
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - in: query
+        name: paginated
+        schema:
+          enum:
+          - '1'
+          type: string
+          minLength: 1
+        description: '* `1` - 1'
+      - in: query
+        name: price_max
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: price_min
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: q
+        schema:
+          type: string
+          maxLength: 100
+      - in: query
+        name: rent_max
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: rent_min
+        schema:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      - in: query
+        name: status
+        schema:
+          enum:
+          - draft
+          - submitted
+          - revision
+          - approved
+          type: string
+          minLength: 1
+        description: |-
+          * `draft` - draft
+          * `submitted` - submitted
+          * `revision` - revision
+          * `approved` - approved
+      - in: query
+        name: transaction
+        schema:
+          enum:
+          - sale
+          - rent
+          type: string
+          minLength: 1
+        description: |-
+          * `sale` - sale
+          * `rent` - rent
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/public/listings/{id}:
+    get:
+      operationId: public_listing_detail
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/public/offices:
+    get:
+      operationId: v1_public_offices_retrieve
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/reports/office:
+    get:
+      operationId: v1_reports_office_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/revisions/{id}/review:
+    post:
+      operationId: v1_revisions_review_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewRevision'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReviewRevision'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReviewRevision'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/settings/office:
+    get:
+      operationId: v1_settings_office_retrieve
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+    put:
+      operationId: v1_settings_office_update
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SettingsInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SettingsInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/visits:
+    get:
+      operationId: visits_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitPage'
+          description: ''
+    post:
+      operationId: v1_visits_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VisitInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VisitInput'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/visits/{id}:
+    get:
+      operationId: v1_visits_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitOutput'
+          description: ''
+    patch:
+      operationId: v1_visits_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVisitEditInput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVisitEditInput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVisitEditInput'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitOutput'
+          description: ''
+        '409':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/visits/{id}/history:
+    get:
+      operationId: v1_visits_history_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    AccessEnum:
+      enum:
+      - unknown
+      - paved
+      - dirt
+      type: string
+      description: |-
+        * `unknown` - unknown
+        * `paved` - paved
+        * `dirt` - dirt
+    AdvisorInput:
+      type: object
+      properties:
+        username:
+          type: string
+          pattern: ^[a-zA-Z0-9_.-]{3,100}$
+        first_name:
+          type: string
+          maxLength: 100
+        password:
+          type: string
+          maxLength: 128
+      required:
+      - first_name
+      - password
+      - username
+    AssignInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        assignee_id:
+          type: string
+          format: uuid
+        reason:
+          type: string
+          maxLength: 500
+      required:
+      - assignee_id
+      - reason
+      - version
+    BlankEnum:
+      enum:
+      - ''
+    ContactOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+      required:
+      - name
+      - phone
+    CooperationDecisionDecisionEnum:
+      enum:
+      - accepted
+      - rejected
+      - closed
+      - reopen
+      type: string
+      description: |-
+        * `accepted` - accepted
+        * `rejected` - rejected
+        * `closed` - closed
+        * `reopen` - reopen
+    CooperationInput:
+      type: object
+      properties:
+        demand_id:
+          type: string
+          format: uuid
+        offering_id:
+          type: string
+          format: uuid
+      required:
+      - demand_id
+      - offering_id
+    CooperationOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        demand_id:
+          type: string
+          format: uuid
+        offering_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        reason_code:
+          type: string
+        version:
+          type: integer
+        can_decide:
+          type: boolean
+        can_schedule:
+          type: boolean
+        can_close:
+          type: boolean
+        can_reopen:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - can_close
+      - can_decide
+      - can_reopen
+      - can_schedule
+      - created_at
+      - demand_id
+      - id
+      - offering_id
+      - reason_code
+      - status
+      - version
+    CooperationPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CooperationOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    CreateDeal:
+      type: object
+      properties:
+        offering:
+          type: string
+          format: uuid
+        amount:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - amount
+      - offering
+    CurrencyEnum:
+      enum:
+      - IRT
+      type: string
+      description: '* `IRT` - IRT'
+    CustomerAuth:
+      type: object
+      properties:
+        office:
+          type: string
+          format: uuid
+        username:
+          type: string
+          pattern: ^[a-zA-Z0-9_.-]{3,100}$
+        password:
+          type: string
+          maxLength: 128
+          minLength: 12
+      required:
+      - office
+      - password
+      - username
+    DemandEditInputStatusEnum:
+      enum:
+      - open
+      - closed
+      type: string
+      description: |-
+        * `open` - open
+        * `closed` - closed
+    DemandInput:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/PropertyKindEnum'
+        transaction:
+          $ref: '#/components/schemas/TransactionEnum'
+        districts:
+          type: array
+          items:
+            type: string
+            maxLength: 100
+          maxItems: 30
+        area_min:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        area_max:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        budget_min_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        budget_max_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        deposit_max_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        rent_max_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        person_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          maxLength: 150
+        phone:
+          type: string
+          maxLength: 11
+          pattern: ^09[0-9]{9}$
+      required:
+      - area_max
+      - area_min
+      - kind
+      - transaction
+    DemandOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+        transaction:
+          type: string
+        districts:
+          type: array
+          items:
+            type: string
+        area_min:
+          type: string
+        area_max:
+          type: string
+        budget_min_toman:
+          type: string
+        budget_max_toman:
+          type: string
+        deposit_max_toman:
+          type: string
+        rent_max_toman:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+        can_edit:
+          type: boolean
+        can_operate:
+          type: boolean
+        can_view_private:
+          type: boolean
+        introducer_id:
+          type: string
+          format: uuid
+        assignee_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - area_max
+      - area_min
+      - assignee_id
+      - budget_max_toman
+      - budget_min_toman
+      - can_edit
+      - can_operate
+      - can_view_private
+      - created_at
+      - currency
+      - deposit_max_toman
+      - districts
+      - id
+      - introducer_id
+      - kind
+      - rent_max_toman
+      - status
+      - transaction
+      - version
+    DemandPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DemandOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    DocumentInput:
+      type: object
+      properties:
+        file:
+          type: string
+          format: uri
+      required:
+      - file
+    EditInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        negotiable_price:
+          type: boolean
+        details:
+          $ref: '#/components/schemas/PropertyDetails'
+        owner_version:
+          type: integer
+          minimum: 1
+        kind:
+          $ref: '#/components/schemas/PropertyKindEnum'
+        district:
+          type: string
+          maxLength: 100
+        area:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        transaction:
+          $ref: '#/components/schemas/TransactionEnum'
+        exact_address:
+          type: string
+          maxLength: 1000
+        owner_name:
+          type: string
+          maxLength: 150
+        owner_phone:
+          type: string
+          maxLength: 11
+          pattern: ^09[0-9]{9}$
+        price_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        deposit_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        rent_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - version
+    FeatureAvailabilityEnum:
+      enum:
+      - unknown
+      - 'yes'
+      - 'no'
+      type: string
+      description: |-
+        * `unknown` - unknown
+        * `yes` - yes
+        * `no` - no
+    FollowUpInput:
+      type: object
+      properties:
+        cooperation_id:
+          type: string
+          format: uuid
+        kind:
+          $ref: '#/components/schemas/FollowUpKindEnum'
+        body:
+          type: string
+          maxLength: 2000
+        due_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - body
+      - cooperation_id
+      - kind
+    FollowUpKindEnum:
+      enum:
+      - call
+      - note
+      - task
+      type: string
+      description: |-
+        * `call` - call
+        * `note` - note
+        * `task` - task
+    FollowUpOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        cooperation_id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+        due_at:
+          type: string
+          format: date-time
+          nullable: true
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        overdue:
+          type: boolean
+        version:
+          type: integer
+      required:
+      - completed_at
+      - cooperation_id
+      - due_at
+      - id
+      - kind
+      - overdue
+      - version
+    FollowUpPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FollowUpOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    InviteAccept:
+      type: object
+      properties:
+        token:
+          type: string
+          maxLength: 128
+          minLength: 40
+        username:
+          type: string
+          pattern: ^[a-zA-Z0-9_.-]{3,100}$
+        name:
+          type: string
+          maxLength: 100
+        password:
+          type: string
+          maxLength: 128
+          minLength: 12
+      required:
+      - name
+      - password
+      - token
+      - username
+    LandUseEnum:
+      enum:
+      - unknown
+      - residential
+      - agricultural
+      - commercial
+      type: string
+      description: |-
+        * `unknown` - unknown
+        * `residential` - residential
+        * `agricultural` - agricultural
+        * `commercial` - commercial
+    LoginInput:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 150
+        password:
+          type: string
+          maxLength: 128
+      required:
+      - password
+      - username
+    MatchOutput:
+      type: object
+      properties:
+        offering:
+          $ref: '#/components/schemas/OfferingOutput'
+        eligible:
+          type: boolean
+        score:
+          type: integer
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchReason'
+        rules_version:
+          type: string
+      required:
+      - eligible
+      - offering
+      - reasons
+      - rules_version
+      - score
+    MatchPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchOutput'
+        candidate_limit:
+          type: integer
+      required:
+      - candidate_limit
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    MatchReason:
+      type: object
+      properties:
+        criterion:
+          type: string
+        label:
+          type: string
+        matched:
+          type: boolean
+        required:
+          type: boolean
+        weight:
+          type: integer
+      required:
+      - criterion
+      - label
+      - matched
+      - required
+      - weight
+    NoteOutput:
+      type: object
+      properties:
+        body:
+          type: string
+      required:
+      - body
+    NotificationOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        event_code:
+          type: string
+        label:
+          type: string
+        record_id:
+          type: string
+          format: uuid
+        record_type:
+          type: string
+        read_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - created_at
+      - event_code
+      - id
+      - label
+      - read_at
+      - record_id
+      - record_type
+    NotificationPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    OfferingInput:
+      type: object
+      properties:
+        negotiable_price:
+          type: boolean
+          default: false
+        details:
+          $ref: '#/components/schemas/PropertyDetails'
+        kind:
+          $ref: '#/components/schemas/PropertyKindEnum'
+        district:
+          type: string
+          maxLength: 100
+        area:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        exact_address:
+          type: string
+          maxLength: 1000
+        owner_name:
+          type: string
+          maxLength: 150
+        owner_phone:
+          type: string
+          maxLength: 11
+          pattern: ^09[0-9]{9}$
+        transaction:
+          $ref: '#/components/schemas/TransactionEnum'
+        price_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        deposit_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        rent_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+      required:
+      - area
+      - district
+      - exact_address
+      - kind
+      - owner_name
+      - owner_phone
+      - price_toman
+      - transaction
+    OfferingOutput:
+      type: object
+      properties:
+        negotiable_price:
+          type: boolean
+        details:
+          $ref: '#/components/schemas/PropertyDetails'
+        id:
+          type: string
+          format: uuid
+        property_id:
+          type: string
+          format: uuid
+        kind:
+          type: string
+        district:
+          type: string
+        area:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        transaction:
+          type: string
+        price_toman:
+          type: string
+          description: Integer toman encoded as a string to preserve bigint precision.
+        deposit_toman:
+          type: string
+        rent_toman:
+          type: string
+        currency:
+          $ref: '#/components/schemas/CurrencyEnum'
+        status:
+          type: string
+        review_reason:
+          type: string
+        version:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        can_edit:
+          type: boolean
+        can_view_private:
+          type: boolean
+        can_review:
+          type: boolean
+      required:
+      - area
+      - can_edit
+      - can_review
+      - can_view_private
+      - created_at
+      - currency
+      - deposit_toman
+      - details
+      - district
+      - id
+      - kind
+      - negotiable_price
+      - price_toman
+      - property_id
+      - rent_toman
+      - review_reason
+      - status
+      - transaction
+      - version
+    OfferingPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferingOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    OutcomeCodeEnum:
+      enum:
+      - interested
+      - not_suitable
+      - no_show
+      - not_available
+      - needs_update
+      - schedule_conflict
+      - customer_cancelled
+      - completed
+      - other
+      type: string
+      description: |-
+        * `interested` - interested
+        * `not_suitable` - not_suitable
+        * `no_show` - no_show
+        * `not_available` - not_available
+        * `needs_update` - needs_update
+        * `schedule_conflict` - schedule_conflict
+        * `customer_cancelled` - customer_cancelled
+        * `completed` - completed
+        * `other` - other
+    PatchedActiveInput:
+      type: object
+      properties:
+        active:
+          type: boolean
+    PatchedCooperationDecision:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        decision:
+          $ref: '#/components/schemas/CooperationDecisionDecisionEnum'
+        reason_code:
+          oneOf:
+          - $ref: '#/components/schemas/ReasonCodeEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+    PatchedDemandEditInput:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/PropertyKindEnum'
+        transaction:
+          $ref: '#/components/schemas/TransactionEnum'
+        districts:
+          type: array
+          items:
+            type: string
+            maxLength: 100
+          maxItems: 30
+        area_min:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        area_max:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        budget_min_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        budget_max_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        deposit_max_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        rent_max_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          default: 0
+        version:
+          type: integer
+          minimum: 1
+        status:
+          $ref: '#/components/schemas/DemandEditInputStatusEnum'
+    PatchedEditInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        negotiable_price:
+          type: boolean
+        details:
+          $ref: '#/components/schemas/PropertyDetails'
+        owner_version:
+          type: integer
+          minimum: 1
+        kind:
+          $ref: '#/components/schemas/PropertyKindEnum'
+        district:
+          type: string
+          maxLength: 100
+        area:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        transaction:
+          $ref: '#/components/schemas/TransactionEnum'
+        exact_address:
+          type: string
+          maxLength: 1000
+        owner_name:
+          type: string
+          maxLength: 150
+        owner_phone:
+          type: string
+          maxLength: 11
+          pattern: ^09[0-9]{9}$
+        price_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        deposit_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        rent_toman:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PatchedRequestChange:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        status:
+          $ref: '#/components/schemas/RequestChangeStatusEnum'
+    PatchedVersionInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+    PatchedVisitEditInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        action:
+          $ref: '#/components/schemas/VisitEditInputActionEnum'
+        scheduled_at:
+          type: string
+          format: date-time
+        outcome_code:
+          oneOf:
+          - $ref: '#/components/schemas/OutcomeCodeEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+    PersonInput:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        phone:
+          type: string
+          maxLength: 11
+          pattern: ^09[0-9]{9}$
+      required:
+      - name
+      - phone
+    PersonOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        label:
+          type: string
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationsEnum'
+      required:
+      - id
+      - label
+      - relations
+    PersonPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+    PrivateOutput:
+      type: object
+      properties:
+        owner_version:
+          type: integer
+        owner_name:
+          type: string
+        owner_phone:
+          type: string
+        exact_address:
+          type: string
+      required:
+      - exact_address
+      - owner_name
+      - owner_phone
+      - owner_version
+    PropertyDetails:
+      type: object
+      properties:
+        rooms:
+          type: integer
+          maximum: 100
+          minimum: 0
+          nullable: true
+        floor:
+          type: integer
+          maximum: 300
+          minimum: -20
+          nullable: true
+        floors:
+          type: integer
+          maximum: 300
+          minimum: 1
+          nullable: true
+        elevator:
+          $ref: '#/components/schemas/FeatureAvailabilityEnum'
+        parking:
+          $ref: '#/components/schemas/FeatureAvailabilityEnum'
+        water:
+          $ref: '#/components/schemas/FeatureAvailabilityEnum'
+        gas:
+          $ref: '#/components/schemas/FeatureAvailabilityEnum'
+        electricity:
+          $ref: '#/components/schemas/FeatureAvailabilityEnum'
+        land_use:
+          $ref: '#/components/schemas/LandUseEnum'
+        access:
+          $ref: '#/components/schemas/AccessEnum'
+    PropertyKindEnum:
+      enum:
+      - apartment
+      - villa
+      - land
+      - commercial
+      - office
+      - other
+      type: string
+      description: |-
+        * `apartment` - apartment
+        * `villa` - villa
+        * `land` - land
+        * `commercial` - commercial
+        * `office` - office
+        * `other` - other
+    PublicImageInput:
+      type: object
+      properties:
+        file:
+          type: string
+          format: uri
+        content_reviewed:
+          type: boolean
+      required:
+      - content_reviewed
+      - file
+    PublishInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        action:
+          $ref: '#/components/schemas/PublishInputActionEnum'
+        reference:
+          type: string
+          maxLength: 500
+        content_reviewed:
+          type: boolean
+          default: false
+      required:
+      - action
+      - version
+    PublishInputActionEnum:
+      enum:
+      - consent
+      - revoke
+      - publish
+      - stop
+      type: string
+      description: |-
+        * `consent` - consent
+        * `revoke` - revoke
+        * `publish` - publish
+        * `stop` - stop
+    ReasonCodeEnum:
+      enum:
+      - not_available
+      - needs_update
+      - schedule_conflict
+      - customer_cancelled
+      - completed
+      - other
+      type: string
+      description: |-
+        * `not_available` - not_available
+        * `needs_update` - needs_update
+        * `schedule_conflict` - schedule_conflict
+        * `customer_cancelled` - customer_cancelled
+        * `completed` - completed
+        * `other` - other
+    RelationsEnum:
+      enum:
+      - owner
+      - applicant
+      type: string
+      description: |-
+        * `owner` - owner
+        * `applicant` - applicant
+    RequestChangeStatusEnum:
+      enum:
+      - received
+      - contacted
+      - closed
+      type: string
+      description: |-
+        * `received` - received
+        * `contacted` - contacted
+        * `closed` - closed
+    RequestInput:
+      type: object
+      properties:
+        publication:
+          type: string
+          format: uuid
+        kind:
+          $ref: '#/components/schemas/RequestInputKindEnum'
+        message:
+          type: string
+          maxLength: 1000
+      required:
+      - kind
+      - message
+      - publication
+    RequestInputKindEnum:
+      enum:
+      - visit
+      - information
+      type: string
+      description: |-
+        * `visit` - visit
+        * `information` - information
+    ReviewInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        decision:
+          $ref: '#/components/schemas/ReviewInputDecisionEnum'
+        reason:
+          type: string
+          maxLength: 500
+      required:
+      - decision
+      - version
+    ReviewInputDecisionEnum:
+      enum:
+      - approved
+      - revision
+      type: string
+      description: |-
+        * `approved` - approved
+        * `revision` - revision
+    ReviewRevision:
+      type: object
+      properties:
+        decision:
+          $ref: '#/components/schemas/ReviewRevisionDecisionEnum'
+        reason:
+          type: string
+          maxLength: 500
+      required:
+      - decision
+      - reason
+    ReviewRevisionDecisionEnum:
+      enum:
+      - approved
+      - rejected
+      type: string
+      description: |-
+        * `approved` - approved
+        * `rejected` - rejected
+    RevisionInput:
+      type: object
+      properties:
+        base_version:
+          type: integer
+          minimum: 1
+        changes:
+          $ref: '#/components/schemas/EditInput'
+      required:
+      - base_version
+      - changes
+    SettingsInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+        response_hours:
+          type: integer
+          maximum: 720
+          minimum: 0
+          default: 0
+        name:
+          type: string
+          maxLength: 120
+        city:
+          type: string
+          maxLength: 100
+        color:
+          type: string
+          pattern: ^#[0-9a-fA-F]{6}$
+      required:
+      - city
+      - color
+      - name
+      - version
+    TransactionEnum:
+      enum:
+      - sale
+      - rent
+      type: string
+      description: |-
+        * `sale` - sale
+        * `rent` - rent
+    VersionInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+      required:
+      - version
+    VisitEditInputActionEnum:
+      enum:
+      - reschedule
+      - complete
+      - cancel
+      type: string
+      description: |-
+        * `reschedule` - reschedule
+        * `complete` - complete
+        * `cancel` - cancel
+    VisitInput:
+      type: object
+      properties:
+        cooperation_id:
+          type: string
+          format: uuid
+        cooperation_version:
+          type: integer
+          minimum: 1
+        scheduled_at:
+          type: string
+          format: date-time
+      required:
+      - cooperation_id
+      - cooperation_version
+      - scheduled_at
+    VisitOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        cooperation_id:
+          type: string
+          format: uuid
+        scheduled_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+        outcome_code:
+          type: string
+        version:
+          type: integer
+        can_change:
+          type: boolean
+      required:
+      - can_change
+      - cooperation_id
+      - id
+      - outcome_code
+      - scheduled_at
+      - status
+      - version
+    VisitPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitOutput'
+      required:
+      - count
+      - has_more
+      - limit
+      - offset
+      - results
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

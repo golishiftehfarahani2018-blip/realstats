@@ -1,0 +1,9 @@
+services:
+  backend:
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes: ['./backend:/app']
+    environment: {DEBUG: '1'}
+  frontend:
+    build: {context: ./frontend, target: build}
+    command: npm run dev
+    volumes: ['./frontend/app:/app/app']

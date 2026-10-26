@@ -1,0 +1,1 @@
+PASS: manager creates private invitation through UI; fragment token accepted once; invited advisor logs in and cannot access manager report. No credentials or invitation token logged.

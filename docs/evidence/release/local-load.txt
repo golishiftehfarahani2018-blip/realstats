@@ -1,0 +1,2 @@
+PASS: 100 local public-list requests, concurrency 5, all responses valid and free of private field names.
+Elapsed 0.78s; median 37ms; p95 58ms. This is a small local load smoke test, not a production capacity claim.

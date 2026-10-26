@@ -1,0 +1,4 @@
+Operations to perform:
+  Apply all migrations: auth, business, contenttypes, core, crm, sessions
+Running migrations:
+  Applying core.0008_offering_negotiable_price... OK

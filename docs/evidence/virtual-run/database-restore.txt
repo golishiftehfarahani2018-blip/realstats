@@ -1,0 +1,8 @@
+Person: restored records and decrypted values match (2)
+Offering: restored records and decrypted values match (1)
+AuditEvent: restored records and decrypted values match (22)
+Demand: restored records and decrypted values match (1)
+Cooperation: restored records and decrypted values match (1)
+Visit: restored records and decrypted values match (1)
+FollowUp: restored records and decrypted values match (2)
+PASS: PostgreSQL backup restored into isolated database; original database untouched; same encryption key successfully decrypts restored values.

@@ -1,0 +1,61 @@
+name: estate-office
+services:
+  db:
+    image: postgres:17.11-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?generate .env}
+      POSTGRES_USER: ${POSTGRES_USER:?generate .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?generate .env}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  migrate:
+    build: ./backend
+    env_file: .env
+    command: python manage.py migrate --noinput
+    depends_on:
+      db: {condition: service_healthy}
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      NO_PROXY: localhost,127.0.0.1,db,storage,backend,frontend
+      no_proxy: localhost,127.0.0.1,db,storage,backend,frontend
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  worker:
+    build: ./backend
+    image: estate-office-backend
+    env_file: .env
+    command: python manage.py run_reminders
+    restart: unless-stopped
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  frontend:
+    build: ./frontend
+  nginx:
+    image: nginx:1.30.6-alpine
+    ports: ['127.0.0.1:8080:80']
+    volumes: ['./infra/nginx.conf:/etc/nginx/conf.d/default.conf:ro']
+    depends_on: [backend, frontend]
+  storage:
+    image: chrislusf/seaweedfs:4.51
+    command: mini -dir=/data
+    environment:
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:?generate .env}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:?generate .env}
+    volumes: [media_data:/data]
+  storage-init:
+    build: ./backend
+    env_file: .env
+    environment:
+      NO_PROXY: localhost,127.0.0.1,db,storage,backend,frontend
+      no_proxy: localhost,127.0.0.1,db,storage,backend,frontend
+    command: python manage.py init_storage
+    depends_on: [storage]
+volumes:
+  postgres_data:
+  media_data:

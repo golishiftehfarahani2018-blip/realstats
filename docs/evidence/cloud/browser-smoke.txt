@@ -1,0 +1,3 @@
+manager: login, workspace, RTL, viewport, logout PASS
+advisor1: login, workspace, RTL, viewport, logout PASS
+advisor2: login, workspace, RTL, viewport, logout PASS

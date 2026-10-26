@@ -1,0 +1,33 @@
+
+> estate-office@0.2.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 36ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 562ms
+  Running TypeScript ...
+  Finished TypeScript in 781ms ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/5) ...
+  Generating static pages using 4 workers (1/5) 
+  Generating static pages using 4 workers (2/5) 
+  Generating static pages using 4 workers (3/5) 
+✓ Generating static pages using 4 workers (5/5) in 250ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /join
+└ ○ /showcase
+
+
+○  (Static)  prerendered as static content
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

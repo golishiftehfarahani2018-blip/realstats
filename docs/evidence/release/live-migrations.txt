@@ -1,0 +1,11 @@
+Operations to perform:
+  Apply all migrations: auth, business, contenttypes, core, crm, sessions
+Running migrations:
+  Applying core.0007_property_details... OK
+  Applying crm.0008_remove_notification_crm_safe_notification_code_and_more... OK
+  Applying business.0001_initial... OK
+  Applying business.0002_integrity... OK
+  Applying business.0003_invitation_publicimage... OK
+  Applying business.0004_media_invitation_integrity... OK
+  Applying business.0005_officesettings_response_hours_remindersent... OK
+  Applying business.0006_reminder_integrity... OK

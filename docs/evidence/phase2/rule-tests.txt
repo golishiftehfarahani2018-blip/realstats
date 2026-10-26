@@ -1,0 +1,7 @@
+..........................
+----------------------------------------------------------------------
+Ran 26 tests in 0.062s
+
+OK
+Found 26 test(s).
+System check identified no issues (0 silenced).

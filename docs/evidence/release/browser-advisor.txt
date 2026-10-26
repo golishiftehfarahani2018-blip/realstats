@@ -1,0 +1,1 @@
+PASS: advisor accepts own share through real mobile UI; server returns only own allocation without ledger or office fee.

@@ -1,0 +1,5 @@
+PASS manager consent and reviewed publication through UI
+PASS customer registration, favorites, visit request, own tracking, mobile layout
+PASS private staff inbox and request status mutation
+PASS manager deal, fixed agreement, receipt, payout, immutable reversal, cancellation through UI
+PASS office report and no browser page errors

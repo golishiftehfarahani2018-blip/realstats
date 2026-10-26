@@ -1,0 +1,93 @@
+@import "tailwindcss";
+:root {
+  --brand: #17685c;
+  background: #f3f5f5;
+  color: #192b32;
+  font-family: Tahoma, Arial, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #58b2a5;
+  outline-offset: 2px;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced9da;
+  border-radius: 0.65rem;
+  background: white;
+}
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+}
+.primary {
+  background: var(--brand);
+  color: #fff;
+  border: 0;
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.65rem;
+}
+.secondary {
+  border: 1px solid #cad7d5;
+  background: white;
+  border-radius: 0.65rem;
+  padding: 0.65rem 1rem;
+}
+.card {
+  background: #fff;
+  border: 1px solid #e1e7e6;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 3px 15px #18342a04;
+}
+.muted {
+  color: #617478;
+}
+.badge {
+  display: inline-flex;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  background: #edf4f2;
+  color: #17685c;
+}
+.error {
+  color: #9c2435;
+  background: #fff1f1;
+  padding: 1rem;
+  border-radius: 0.7rem;
+}
+.success {
+  color: #17685c;
+  background: #e5f2ec;
+  padding: 1rem;
+  border-radius: 0.7rem;
+}
+a {
+  color: var(--brand);
+}

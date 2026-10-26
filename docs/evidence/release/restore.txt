@@ -1,0 +1,3 @@
+40 objects imported automatically (use -v 2 for details).
+
+PASS: restored every registered model (40) with full row and decrypted-value equality; cloned both media buckets and verified 1 object checksums; restored private document resolves to restored media. Original database and buckets were never overwritten.

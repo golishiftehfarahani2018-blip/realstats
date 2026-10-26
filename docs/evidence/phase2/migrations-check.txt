@@ -1,0 +1,3 @@
+/workspace/scratch/1ef5590b6f9f/.venv/lib/python3.12/site-packages/django/core/management/commands/makemigrations.py:161: RuntimeWarning: Got an error checking a consistent migration history performed for database connection 'default': [Errno -3] Temporary failure in name resolution
+  warnings.warn(
+No changes detected

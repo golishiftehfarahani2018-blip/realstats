@@ -1,0 +1,3 @@
+manager: login, CRM demand/matching/cooperations/visits/followups/notifications/people, RTL, viewport, logout PASS
+advisor1: login, CRM demand/matching/cooperations/visits/followups/notifications/people, RTL, viewport, logout PASS
+advisor2: login, CRM demand/matching/cooperations/visits/followups/notifications/people, RTL, viewport, logout PASS
