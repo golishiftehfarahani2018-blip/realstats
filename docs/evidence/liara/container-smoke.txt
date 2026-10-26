@@ -1,0 +1,4 @@
+PASS: unrelated existing database rejected before migration; migration history unchanged.
+PASS: new dedicated database migrated; HTTPS S3 verified; staff UI, showcase, CSRF and real database readiness return 200 with 1 GiB / 1 CPU limits.
+PASS: repeated startup preserves installation marker and database; no reseeding.
+PASS: SIGTERM cleanly shuts down all managed processes (exit 0). No Liara account resources or paid services created.

@@ -1,0 +1,6 @@
+{
+  "port": 8080,
+  "build": {
+    "dockerfile": "infra/liara/Dockerfile"
+  }
+}
